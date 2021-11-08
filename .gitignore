@@ -1,5 +1,17 @@
-# Created by https://www.toptal.com/developers/gitignore/api/node,windows,macos
-# Edit at https://www.toptal.com/developers/gitignore?templates=node,windows,macos
+# Created by https://www.toptal.com/developers/gitignore/api/node,macos,windows,firebase
+# Edit at https://www.toptal.com/developers/gitignore?templates=node,macos,windows,firebase
+
+### Firebase ###
+.idea
+**/node_modules/*
+**/.firebaserc
+
+### Firebase Patch ###
+.runtimeconfig.json
+.firebase/
+
+###Firestore key###
+experts-81553-e5f9c727d839.json
 
 ### macOS ###
 # General
@@ -186,4 +198,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.toptal.com/developers/gitignore/api/node,windows,macos
+# End of https://www.toptal.com/developers/gitignore/api/node,macos,windows,firebase
