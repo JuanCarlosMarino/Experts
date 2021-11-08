@@ -5,6 +5,7 @@
 .idea
 **/node_modules/*
 **/.firebaserc
+bimoi-experts-75da4861c8a5.json
 
 ### Firebase Patch ###
 .runtimeconfig.json
