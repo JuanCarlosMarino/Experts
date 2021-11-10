@@ -1,5 +1,5 @@
 const admin = require('firebase-admin');
-const serviceAccount = require('./bimoi-experts-75da4861c8a5.json');
+const serviceAccount = require('./experts-81553-d286603d25a6.json');
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount)
@@ -8,3 +8,7 @@ admin.initializeApp({
 const db = admin.firestore(); 
 
 module.exports = db;
+
+
+
+

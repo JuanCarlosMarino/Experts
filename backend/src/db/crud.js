@@ -1,16 +1,18 @@
-const db = require('./firebase.js');
+const db = require("./firebase.js");
 
-// CRUD Users
-// Get all users
-
-
-function getUsers(){
-    db.collection("users").get().then((docs) => {
-        docs.forEach((user) => {
-            console.log(user.data());
+function getExperts(callback){
+    return db.collection("experts").get().then((docs) => {
+        var arrayExperts = []
+        docs.forEach((expert) => {
+            arrayExperts.push(expert.data());
         })
+        // CUANDO LLEGAMOS ACÁ, SE DEBE ENVIAR LA RESPUESTA AL GET REQUEST
+        callback(arrayExperts);
     })
+} 
+
+module.exports = {
+    getExperts
 }
 
-module.exports = getUsers;
 
