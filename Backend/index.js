@@ -8,14 +8,14 @@ const dbU = require('./src/db/crudUsers.js')
 app.use(express.json());
 
 //Experts Methods
-app.get('/get-experts', (req, res)=>{
+app.get('/expert', (req, res)=>{
     dbE.getExperts(function(refDoc){
         res.json(refDoc);
     })
     
 })
 
-app.get('/get-expert/:id', (req, res)=>{
+app.get('/expert/:id', (req, res)=>{
     const uid = req.params.id;
     dbE.getExpert(uid, function(refDoc){
         res.json(refDoc);
@@ -23,7 +23,7 @@ app.get('/get-expert/:id', (req, res)=>{
     
 })
 
-app.post('/add-expert', (req, res)=>{
+app.post('/expert', (req, res)=>{
     const body = req.body;
     dbE.addExpert(body, function(response){
         if(response === 'Success'){
@@ -50,7 +50,7 @@ app.patch('/update-expert-partial/:id', (req, res)=>{
     })
 })
 
-app.delete('/delete-expert/:id', (req, res)=>{
+app.delete('/expert/:id', (req, res)=>{
     const id = req.params.id;
     dbE.deleteExpert(id, function(refDoc){
         res.send(refDoc);
@@ -59,7 +59,7 @@ app.delete('/delete-expert/:id', (req, res)=>{
 
 //Users methods
 
-app.get('/get-user/:id', (req, res)=>{
+app.get('/user/:id', (req, res)=>{
     const uid = req.params.id;
     dbU.getUser(uid, function(refDoc){
         res.json(refDoc);
@@ -67,7 +67,7 @@ app.get('/get-user/:id', (req, res)=>{
     
 })
 
-app.post('/add-user', (req, res)=>{
+app.post('/user', (req, res)=>{
     const body = req.body;
     dbU.addUser(body, function(refDoc){
         res.send(refDoc);
@@ -90,7 +90,7 @@ app.patch('/update-user-partial/:id', (req, res)=>{
     })
 })
 
-app.delete('/delete-user/:id', (req, res)=>{
+app.delete('/user/:id', (req, res)=>{
     const id = req.params.id;
     dbU.deleteUser(id, function(refDoc){
         res.send(refDoc);
