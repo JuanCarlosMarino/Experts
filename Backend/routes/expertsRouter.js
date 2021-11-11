@@ -20,7 +20,7 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
     const body = req.body;
-    const country = body.country;
+    const country = body.Location;
     axios.get('https://restcountries.com/v3.1/name/' + country)
         .then(function (response) {
             // handle success
