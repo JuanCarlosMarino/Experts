@@ -1,5 +1,5 @@
 // Forma para importar variables o funciones, cuando lo que se exporta es un objeto
-const { getExperts } = require("./src/db/crudExperts.js");
+const dbE = require("./src/db/crudExperts.js");
 
 const express = require('express');
 const app = express();
@@ -7,14 +7,27 @@ const port = 3000;
 
 app.use(express.json());
 
-app.get('/get-experts',function(req, res){
-    getExperts(function(arrayExperts){
+// Traer todos los expertos
+app.get('/experts',function(req, res){
+    dbE.getExperts(function(arrayExperts){
         res.json(arrayExperts);
     }) 
 })
 
-app.get('/users',function(req, res){
-    res.send('Esta es la lista de usuarios');
+// Traer un experto específico
+app.get('/experts/:id', function(req, res){
+    const uid = req.params.id;
+    dbE.getExpert(uid, function(refDoc){
+        res.json(refDoc);
+    })
+})
+
+// Crear un experto en la DB
+app.post('/experts', function(req, res){
+    const expert = req.body;
+    dbE.addExpert(expert, function(status){
+        res.json(status);
+    })
 })
 
 app.listen(port, () => {
