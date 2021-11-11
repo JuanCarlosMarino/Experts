@@ -1,5 +1,5 @@
 // Forma para importar variables o funciones, cuando lo que se exporta es un objeto
-const { getExperts } = require("./src/db/crud.js");
+const { getExperts } = require("./src/db/crudExperts.js");
 
 const express = require('express');
 const app = express();
