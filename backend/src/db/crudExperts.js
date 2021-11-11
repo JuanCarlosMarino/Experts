@@ -37,6 +37,45 @@ function addExpert(expert, callback){
         })
 }
 
+function updateExpertTotally(uid, expert, callback){
+    return db.collection("experts").doc(uid).set(expert)
+        .then(() => {
+            callback("Success");
+        })
+        .catch((error) =>{
+            callback(`Error to get users ${error}`);
+        })
+}
+
+function updateExpertPartially(uid, expert, callback){
+    return db.collection("experts").doc(uid).update(expert)
+        .then(() => {
+            callback("Success");
+        })
+        .catch((error) =>{
+            callback(`Error to get users ${error}`);
+        })
+}
+
+function deleteExpert(uid, callback){
+    return db.collection("experts").doc(uid).delete()
+    .then(() => {
+        callback("Success");
+    })
+    .catch((error) =>{
+        callback(`Error to get users ${error}`);
+    })
+}
+
+module.exports = {
+    getExperts,
+    getExpert,
+    addExpert,
+    updateExpertPartially,
+    updateExpertTotally,
+    deleteExpert
+}
+
 
 // PARA PROBAR LOS METODOS
 // correr node crudExperts.js
@@ -57,13 +96,27 @@ const expert = {
 addExpert(expert, (status)=>{
     console.log(status);
 })
-*/
 
 
-module.exports = {
-    getExperts,
-    getExpert,
-    addExpert
+const expert = {
+    "location" : "Cartagena",
+    "occupation": "Artista"
 }
+
+// Actualizar totalmente un documento
+updateExpertTotally("Ellz8i4XbcwwlDhujAdO", expert, function(status){
+    console.log(status);
+})
+
+// Actualizar parcialmente un documento
+updateExpertPartially("Ellz8i4XbcwwlDhujAdO", expert, function(status){
+    console.log(status);
+})
+
+// Borrar documento usando el id
+deleteExpert("kH9pnrlHoFCuruwDv9a5", (status) =>{
+    console.log(status);
+})
+*/
 
 
