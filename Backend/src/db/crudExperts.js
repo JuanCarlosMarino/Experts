@@ -8,7 +8,9 @@ function getExperts(callback) {
         .then((refDoc) => {
             var arrayDOc = [];
             refDoc.forEach((doc) => {
-                arrayDOc.push(doc.data());
+                const obj = doc.data();
+                obj.id = doc.id;
+                arrayDOc.push(obj);
                 //console.log(doc.id, '=>', doc.data());
             })
             callback(arrayDOc)

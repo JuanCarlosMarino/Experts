@@ -1,0 +1,12 @@
+[
+    {
+        "name": "Pedro Perez",
+        "DNI": "65965654",
+        "id": "1"
+    },
+    {
+        "name": "Maria Mendez",
+        "DNI": "65965654",
+        "id" : "2"
+    }
+]
