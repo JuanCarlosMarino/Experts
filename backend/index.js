@@ -26,7 +26,12 @@ app.get('/experts/:id', function(req, res){
 app.post('/experts', function(req, res){
     const expert = req.body;
     dbE.addExpert(expert, function(status){
-        res.json(status);
+        if(status === "Success"){
+            res.status(201).json(status);
+        } else {
+            res.status(503).json(status);
+        }
+        
     })
 })
 
