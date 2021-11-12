@@ -67,13 +67,27 @@ function deleteExpert(uid, callback){
     })
 }
 
+function searchExpert(location, callback) {
+    return db.collection('experts').where("location", "==", location).get()
+        .then((refDoc) => {
+            var arrayExperts = [];
+            refDoc.forEach(doc => {                
+                arrayExperts.push(doc.data());
+            })
+            callback(arrayExperts);
+        })
+        .catch((err) => {
+            callback("Error to search expert ", err)
+        })
+}
+
 module.exports = {
     getExperts,
     getExpert,
     addExpert,
     updateExpertPartially,
     updateExpertTotally,
-    deleteExpert
+    deleteExpert, searchExpert
 }
 
 
