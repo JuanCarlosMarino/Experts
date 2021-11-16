@@ -6,7 +6,9 @@ function getExperts(callback){
         .then((docs) => {
             var arrayExperts = []
             docs.forEach((expert) => {
-                arrayExperts.push(expert.data());
+                const obj = expert.data();
+                obj.uid = expert.id;
+                arrayExperts.push(obj);
             })
             // CUANDO LLEGAMOS ACÁ, SE DEBE ENVIAR LA RESPUESTA AL GET REQUEST
         callback(arrayExperts);
@@ -71,7 +73,8 @@ function searchExpert(location, callback) {
     return db.collection('experts').where("location", "==", location).get()
         .then((refDoc) => {
             var arrayExperts = [];
-            refDoc.forEach(doc => {                
+            refDoc.forEach(doc => {       
+                //doc.id --> El id del documento         
                 arrayExperts.push(doc.data());
             })
             callback(arrayExperts);
