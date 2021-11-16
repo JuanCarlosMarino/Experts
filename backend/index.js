@@ -22,9 +22,19 @@ app.get('/experts/:id', function(req, res){
     })
 })
 
+
+// Traer un experto por ubicacion
+app.get('/experts/search/:location', function(req, res){
+    const location = req.params.location;
+    dbE.searchExpert(location, function(refDoc){
+        res.json(refDoc);
+    })
+})
+
 // Crear un experto en la DB
 app.post('/experts', function(req, res){
     const expert = req.body;
+    console.log(req.params);
     dbE.addExpert(expert, function(status){
         if(status === "Success"){
             res.status(201).json(status);
