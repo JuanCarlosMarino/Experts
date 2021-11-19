@@ -1,10 +1,11 @@
 import NavBar from "./components/NavBar";
+import Button from "./components/Button"
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <NavBar nombre="Cirito"/>
-      <h1>This is Bimoi</h1>
+      <Button/>
     </div>
   );
 }

@@ -1,8 +1,7 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button';
 import Nav from 'react-bootstrap/Nav';
-
-
+import Button1 from "./Button";
 
 const NavBar = (props) => {
   return (
@@ -28,16 +27,14 @@ const NavBar = (props) => {
       </Nav>
       <h1 style={styles}>Holis {props.nombre}</h1>
       <Button variant="primary">Primary</Button>
+      <Button1/>
     </div>
 
 
   )
 }
-
 const styles = {
   color: 'red',
-
 }
-
 export default NavBar
 
