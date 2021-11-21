@@ -27,13 +27,6 @@ router.put('/:id', (req, res) => {
     })
 })
 
-router.patch('/:id', (req, res) => {
-    const id = req.params.id;
-    const body = req.body;
-    dbU.updateUserPartial(id, body, function (refDoc) {
-        res.send(refDoc);
-    })
-})
 
 router.delete('/:id', (req, res) => {
     const id = req.params.id;
