@@ -29,10 +29,4 @@ const NavBar = (props) => {
   );
 };
 
-const styles = {
-  color: "red",
-  fontFamily: "Arial",
-  fontSize: "30px",
-};
-
 export default NavBar;
