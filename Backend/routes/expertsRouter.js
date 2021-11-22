@@ -18,7 +18,8 @@ router.get('/:id', (req, res) => {
 
 })
 
-router.post('/', (req, res) => {
+router.put('/:id', (req, res) => {
+    const id = req.params.id;
     const body = req.body;
     const country = body.Location;
     axios.get('https://restcountries.com/v3.1/name/' + country)
@@ -33,7 +34,7 @@ router.post('/', (req, res) => {
             console.log(error);
         })
         .then(()=>{
-            dbE.addExpert(body, function (response) {
+            dbE.addExpert(id, body, function (response) {
                 if (response === 'Success') {
                     res.status(201).send(response);
                 } else {
@@ -43,18 +44,10 @@ router.post('/', (req, res) => {
         })
 })
 
-router.put('/:id', (req, res) => {
-    const id = req.params.id;
-    const body = req.body;
-    dbE.updateExpertTotally(id, body, function (refDoc) {
-        res.send(refDoc);
-    })
-})
-
 router.patch('/:id', (req, res) => {
     const id = req.params.id;
     const body = req.body;
-    dbE.updateExpertPartial(id, body, function (refDoc) {
+    dbE.updateExpert(id, body, function (refDoc) {
         res.send(refDoc);
     })
 })

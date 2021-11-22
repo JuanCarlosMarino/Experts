@@ -2,7 +2,6 @@ const db = require('./firebase.js');
 
 
 //Experts CRUD
-
 function getExperts(callback) {
     return db.collection("experts").get()
         .then((refDoc) => {
@@ -31,17 +30,7 @@ function getExpert(uid, callback) {
         })
 }
 
-function addExpert(user, callback) {
-    return db.collection("experts").add(user)
-        .then(() => {
-            callback("Success")
-        })
-        .catch((error) => {
-            callback(`Error to add user ${error}`)
-        })
-}
-
-function updateExpertTotally(uid, user, callback) {
+function addExpert(uid, user, callback) {
     return db.collection("experts").doc(uid).set(user)
         .then(() => {
             callback("Success")
@@ -51,7 +40,7 @@ function updateExpertTotally(uid, user, callback) {
         })
 }
 
-function updateExpertPartial(uid, user, callback) {
+function updateExpert(uid, user, callback) {
     return db.collection("experts").doc(uid).update(user)
         .then(() => {
             callback("Success")
@@ -88,9 +77,8 @@ function searchExpert(location, callback) {
 module.exports = {
     getExperts,
     getExpert,
-    addExpert,
-    updateExpertTotally,
-    updateExpertPartial,
+    addExpert,    
+    updateExpert,
     deleteExpert,
     searchExpert
 };
