@@ -6,10 +6,13 @@ import Home from "./screens/Home";
 import SearchResults from "./screens/SearchResults";
 import NotFound from "./screens/NotFound";
 
+import NavBar from "./components/NavBar";
+
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        <NavBar />
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/home" element={<Home />} />

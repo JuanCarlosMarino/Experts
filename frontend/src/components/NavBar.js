@@ -6,35 +6,33 @@ import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 
 const NavBar = (props) => {
-    return(
-        <div>
-            <Navbar bg="light" expand="lg">
-            <Container>
-                <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="me-auto">
-                    <Nav.Link href="#home">Home</Nav.Link>
-                    <Nav.Link href="#link">Link</Nav.Link>
-                    <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                    <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                    <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                    <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-                    </NavDropdown>
-                </Nav>
-                </Navbar.Collapse>
-            </Container>
-            </Navbar>
-        </div>
-    )
-}
+  return (
+    <div>
+      <Navbar bg="dark" variant="dark" expand="lg">
+        <Container>
+          <Navbar.Brand href="#home">Experts</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+
+          <Navbar.Collapse
+            id="basic-navbar-nav"
+            className="justify-content-end"
+          >
+            <Nav>
+              <Nav.Link href="#home">Inicio</Nav.Link>
+              <Nav.Link href="#link">Perfil</Nav.Link>
+              <Nav.Link href="#link">Salir</Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+    </div>
+  );
+};
 
 const styles = {
-    color : "red",
-    fontFamily : "Arial",
-    fontSize : "30px"
-}
+  color: "red",
+  fontFamily: "Arial",
+  fontSize: "30px",
+};
 
 export default NavBar;
