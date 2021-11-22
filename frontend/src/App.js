@@ -1,11 +1,22 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import NavBar from "./components/NavBar";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import Landing from "./screens/Landing";
+import Home from "./screens/Home";
+import SearchResults from "./screens/SearchResults";
+import NotFound from "./screens/NotFound";
 
 function App() {
   return (
     <div className="App">
-      <NavBar nombre="Javier" apellido="Triana"/>
-      <h1>Bienvenidos a React!</h1>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/search-results" element={<SearchResults />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
