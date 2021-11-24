@@ -1,11 +1,13 @@
 import React from "react";
 import { Carousel } from "react-bootstrap";
+import SignInButton from "./SignInButton";
 
 const LandingImages = () => {
   const carCaption = (
     <>
       <h1>Experts</h1>
       <h3>Conocimiento especializado a tu alcance</h3>
+      <SignInButton />
     </>
   );
 
