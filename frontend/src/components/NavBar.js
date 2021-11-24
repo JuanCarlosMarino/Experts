@@ -1,8 +1,5 @@
 import React from "react";
-import Navbar from "react-bootstrap/Navbar";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import { Navigate } from "react-router-dom";
+import { Navbar, Nav, Container, Image, Stack } from "react-bootstrap";
 
 const NavBar = () => {
   var user = JSON.parse(localStorage.getItem("user"));
@@ -20,11 +17,14 @@ const NavBar = () => {
   if (user != undefined) {
     navLinks = (
       <Nav>
-        <Nav.Link href="#home">
-          Hola <strong>{user.name}</strong>
+        <Nav.Link href="/home">
+          <Image src={user.photoUrl} width="30px" height="30px" roundedCircle />
         </Nav.Link>
-        <Nav.Link href="#home">Inicio</Nav.Link>
-        <Nav.Link href="#link">Perfil</Nav.Link>
+        <Nav.Link href="/home">
+          <strong>{user.name}</strong>
+        </Nav.Link>
+        <Nav.Link href="/home">Inicio</Nav.Link>
+        <Nav.Link href="/profile">Perfil</Nav.Link>
         <Nav.Link href="/" onClick={logOut}>
           Salir
         </Nav.Link>

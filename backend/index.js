@@ -2,10 +2,12 @@
 const dbE = require("./src/db/crudExperts.js");
 
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const port = 5000;
 
 app.use(express.json());
+app.use(cors());
 
 // Traer todos los expertos
 app.get("/experts", function (req, res) {

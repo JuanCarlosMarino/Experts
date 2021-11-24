@@ -1,5 +1,6 @@
 import React from "react";
 import { Dropdown } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const SearchBar = () => {
   const redirectUrl = "/search-results";
@@ -11,11 +12,26 @@ const SearchBar = () => {
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
-        <Dropdown.Item href={redirectUrl}>Paris</Dropdown.Item>
-        <Dropdown.Item href={redirectUrl}>Londres</Dropdown.Item>
-        <Dropdown.Item href={redirectUrl}>Berlin</Dropdown.Item>
-        <Dropdown.Item href={redirectUrl}>Tokio</Dropdown.Item>
-        <Dropdown.Item href={redirectUrl}>Cartagena</Dropdown.Item>
+        <Dropdown.Item>
+          <Link to={redirectUrl} state={{ city: "Paris" }}>
+            Paris
+          </Link>
+        </Dropdown.Item>
+        <Dropdown.Item>
+          <Link to={redirectUrl} state={{ city: "Londres" }}>
+            Londres
+          </Link>
+        </Dropdown.Item>
+        <Dropdown.Item>
+          <Link to={redirectUrl} state={{ city: "Berlin" }}>
+            Berlin
+          </Link>
+        </Dropdown.Item>
+        <Dropdown.Item>
+          <Link to={redirectUrl} state={{ city: "Pasto" }}>
+            Pasto
+          </Link>
+        </Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
   );
