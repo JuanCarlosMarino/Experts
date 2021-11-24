@@ -1,7 +1,8 @@
 import React from "react";
+import LandingImages from "../components/LandingImages";
 
 const Landing = () => {
-  return <h1>Landing</h1>;
+  return <LandingImages />;
 };
 
 export default Landing;

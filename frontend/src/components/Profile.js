@@ -12,18 +12,20 @@ const Profile = () => {
         height="80px"
       />
       <h4>Jorge Luis Hernandez</h4>
-      <Stack gap={2} direction="horizontal">
-        <GeoAlt />
-        <div>Paris</div>
-      </Stack>
-      <Stack gap={2} direction="horizontal">
-        <Briefcase />
-        <div>Clases de programación</div>
-      </Stack>
-      <p>
-        Hola! Me encanta la tecnología y tengo bastante experiencia enseñando
-        programación.
-      </p>
+      <div className="justify-content-center">
+        <Stack gap={2} direction="horizontal">
+          <GeoAlt />
+          <div>Paris</div>
+        </Stack>
+        <Stack gap={2} direction="horizontal">
+          <Briefcase />
+          <div>Clases de programación</div>
+        </Stack>
+        <p>
+          Hola! Me encanta la tecnología y tengo bastante experiencia enseñando
+          programación.
+        </p>
+      </div>
 
       <Whatsapp size={50} color="green" />
     </Stack>
