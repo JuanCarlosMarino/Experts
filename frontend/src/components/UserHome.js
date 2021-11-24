@@ -14,7 +14,6 @@ const UserHome = () => {
           <Stack gap={2} className="align-items-center">
             <Image src={Logo} width="300px" height="200px" />
             <SearchBar />
-            <h1>Bienvenido {user.name}</h1>
           </Stack>
         </Col>
       </Row>
