@@ -8,7 +8,6 @@ import { searchExperts } from "../apis/crud";
 
 const ResultList = (props) => {
   const [searchResults, setSearchResults] = useState([]);
-  console.log(searchResults);
 
   useEffect(() => {
     searchExperts(props.city, setSearchResults);
@@ -19,11 +18,10 @@ const ResultList = (props) => {
       <Row>
         <Col sm={5}>
           <ListGroup>
-            {searchResults.map((result) => {
-              <ListGroup.Item action href="#link1">
-                <ResultItem expertData={result} />
+            {searchResults.forEach((result) => {
+              <ListGroup.Item action href={result.uid}>
+                <ResultItem />
               </ListGroup.Item>;
-              <h1>Pliiisss</h1>;
             })}
           </ListGroup>
         </Col>
