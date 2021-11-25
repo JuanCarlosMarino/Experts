@@ -14,12 +14,12 @@ const ResultList = (props) => {
   }, []);
 
   return (
-    <Tab.Container id="list-group-tabs-example" defaultActiveKey="#link1">
+    <Tab.Container id="list-group-tabs-example">
       <Row>
         <Col sm={5}>
           <ListGroup>
-            {searchResults.map((result, idx) => (
-              <ListGroup.Item action href="#link1">
+            {searchResults.map((result, index) => (
+              <ListGroup.Item action href={"#" + index}>
                 <ResultItem expertData={result} />
               </ListGroup.Item>
             ))}
@@ -28,21 +28,11 @@ const ResultList = (props) => {
 
         <Col sm={7}>
           <Tab.Content>
-            <Tab.Pane eventKey="#link1">
-              <Profile />
-            </Tab.Pane>
-
-            <Tab.Pane eventKey="#link2">
-              <Profile />
-            </Tab.Pane>
-
-            <Tab.Pane eventKey="#link3">
-              <Profile />
-            </Tab.Pane>
-
-            <Tab.Pane eventKey="#link4">
-              <Profile />
-            </Tab.Pane>
+            {searchResults.map((result, index) => (
+              <Tab.Pane eventKey={"#" + index}>
+                <Profile expertData={result} />
+              </Tab.Pane>
+            ))}
           </Tab.Content>
         </Col>
       </Row>

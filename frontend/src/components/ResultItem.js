@@ -3,25 +3,26 @@ import { Stack, Image } from "react-bootstrap";
 import { GeoAlt, Briefcase } from "react-bootstrap-icons";
 
 const ResultItem = (props) => {
+  const { expertData } = props;
   return (
     <Stack gap={4} direction="horizontal">
       <Image
-        src="https://cdns-images.dzcdn.net/images/artist/ef6244c655e8cbe91eeb56bb6f934176/500x500.jpg"
+        src={expertData.photoUrl}
         roundedCircle
         width="60px"
         height="60px"
       />
       <div>
-        <h5>Jorge Luis Hernandez</h5>
+        <h5>{expertData.name}</h5>
 
         <Stack gap={2} direction="horizontal">
           <GeoAlt />
-          <div>Paris</div>
+          <div>{expertData.location}</div>
         </Stack>
 
         <Stack gap={2} direction="horizontal">
           <Briefcase />
-          <div>Clases de programación</div>
+          <div>{expertData.occupation}</div>
         </Stack>
       </div>
     </Stack>

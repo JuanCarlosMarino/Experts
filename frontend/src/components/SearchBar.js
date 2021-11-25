@@ -1,9 +1,12 @@
 import React from "react";
 import { Dropdown } from "react-bootstrap";
-import { Link } from "react-router-dom";
 
 const SearchBar = () => {
   const redirectUrl = "/search-results";
+  const setSearchedCity = (selectedCity) => {
+    console.log("Selecting city " + selectedCity);
+    localStorage.setItem("city", selectedCity);
+  };
 
   return (
     <Dropdown>
@@ -12,25 +15,35 @@ const SearchBar = () => {
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
-        <Dropdown.Item>
-          <Link to={redirectUrl} state={{ city: "Paris" }}>
-            Paris
-          </Link>
+        <Dropdown.Item
+          href={redirectUrl}
+          onClick={() => setSearchedCity("Paris")}
+        >
+          Paris
         </Dropdown.Item>
-        <Dropdown.Item>
-          <Link to={redirectUrl} state={{ city: "Londres" }}>
-            Londres
-          </Link>
+        <Dropdown.Item
+          href={redirectUrl}
+          onClick={() => setSearchedCity("Londres")}
+        >
+          Londres
         </Dropdown.Item>
-        <Dropdown.Item>
-          <Link to={redirectUrl} state={{ city: "Berlin" }}>
-            Berlin
-          </Link>
+        <Dropdown.Item
+          href={redirectUrl}
+          onClick={() => setSearchedCity("Berlin")}
+        >
+          Berlin
         </Dropdown.Item>
-        <Dropdown.Item>
-          <Link to={redirectUrl} state={{ city: "Pasto" }}>
-            Pasto
-          </Link>
+        <Dropdown.Item
+          href={redirectUrl}
+          onClick={() => setSearchedCity("Tokio")}
+        >
+          Tokio
+        </Dropdown.Item>
+        <Dropdown.Item
+          href={redirectUrl}
+          onClick={setSearchedCity("Cartagena")}
+        >
+          Cartagena
         </Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
