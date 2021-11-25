@@ -2,7 +2,7 @@ import React from "react";
 import { Stack, Image } from "react-bootstrap";
 import { GeoAlt, Briefcase } from "react-bootstrap-icons";
 
-const ResultItem = () => {
+const ResultItem = (props) => {
   return (
     <Stack gap={4} direction="horizontal">
       <Image

@@ -19,12 +19,11 @@ const ResultList = (props) => {
       <Row>
         <Col sm={5}>
           <ListGroup>
-            {searchResults.map((result) => {
+            {searchResults.map((result, idx) => (
               <ListGroup.Item action href="#link1">
                 <ResultItem expertData={result} />
-              </ListGroup.Item>;
-              <h1>Pliiisss</h1>;
-            })}
+              </ListGroup.Item>
+            ))}
           </ListGroup>
         </Col>
 
