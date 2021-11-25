@@ -8,7 +8,6 @@ import { searchExperts } from "../apis/crud";
 
 const ResultList = (props) => {
   const [searchResults, setSearchResults] = useState([]);
-  console.log(searchResults);
 
   useEffect(() => {
     searchExperts(props.city, setSearchResults);
