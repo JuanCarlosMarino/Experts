@@ -4,7 +4,13 @@ import { Tab, Row, Col, ListGroup } from "react-bootstrap";
 import ResultItem from "./ResultItem";
 import Profile from "./Profile";
 
+import { searchExperts } from "../apis/crud";
+
 const ResultList = () => {
+  searchExperts("Londres", (expertsData) => {
+    console.log(expertsData);
+  });
+
   return (
     <Tab.Container id="list-group-tabs-example" defaultActiveKey="#link1">
       <Row>
