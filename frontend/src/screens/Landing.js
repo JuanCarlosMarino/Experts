@@ -6,7 +6,12 @@ import LandingImages from "../components/LandingImages";
 const Landing = () => {
   var user = JSON.parse(localStorage.getItem("user"));
   if (user != undefined) {
-    return <Navigate to="/home" />;
+    if(user.flagNewUser == false){
+      return <Navigate to="/home" />;
+    }else{
+      return <Navigate to="/register" />;
+    }
+    
   }
   return <LandingImages />;
 };
