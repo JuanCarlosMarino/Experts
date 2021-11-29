@@ -10,8 +10,7 @@ const Landing = () => {
       return <Navigate to="/home" />;
     }else{
       return <Navigate to="/register" />;
-    }
-    
+    }    
   }
   return <LandingImages />;
 };

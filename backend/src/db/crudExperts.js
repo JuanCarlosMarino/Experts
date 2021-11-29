@@ -47,6 +47,19 @@ function addExpert(expert, callback) {
     });
 }
 
+function addExpertWithID(uid, expert, callback) {
+  return db
+    .collection("experts")
+    .doc(uid)
+    .set(expert)
+    .then(() => {
+      callback("Success");
+    })
+    .catch((error) => {
+      callback(`Error to get users ${error}`);
+    });
+}
+
 function updateExpertTotally(uid, expert, callback) {
   return db
     .collection("experts")
@@ -112,6 +125,7 @@ module.exports = {
   updateExpertTotally,
   deleteExpert,
   searchExpert,
+  addExpertWithID
 };
 
 // PARA PROBAR LOS METODOS

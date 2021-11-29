@@ -45,6 +45,15 @@ app.post("/experts", function (req, res) {
   });
 });
 
+app.post("/experts/:id", function (req, res) {
+  const uid = req.params.id;
+  const expert = req.body;
+  expert.id = uid;
+  dbE.addExpertWithID(uid, expert, function (status) {
+    res.json(status);
+  });
+});
+
 // Actualizar totalmente un experto en la DB
 app.put("/experts/:id", function (req, res) {
   const uid = req.params.id;
