@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Tab, Row, Col, ListGroup } from "react-bootstrap";
 
 import ResultItem from "./ResultItem";
@@ -6,44 +6,32 @@ import Profile from "./Profile";
 
 import { searchExperts } from "../apis/crud";
 
-const ResultList = () => {
-  searchExperts("Londres", (expertsData) => {
-    console.log(expertsData);
+const ResultList = (props) => {
+  const [searchResults, setSearchResults] = useState([]);
+
+  useEffect(() => {
+    searchExperts(props.location, setSearchResults);
   });
 
   return (
-    <Tab.Container id="list-group-tabs-example" defaultActiveKey="#link1">
+    <Tab.Container id="list-group-tabs-example" defaultActiveKey="#0">
       <Row>
         <Col sm={5}>
           <ListGroup>
-            <ListGroup.Item action href="#link1">
-              <ResultItem />
-            </ListGroup.Item>
-            <ListGroup.Item action href="#link2">
-              <ResultItem />
-            </ListGroup.Item>
-            <ListGroup.Item action href="#link3">
-              <ResultItem />
-            </ListGroup.Item>
-            <ListGroup.Item action href="#link4">
-              <ResultItem />
-            </ListGroup.Item>
+            {searchResults.map((result, index) => (
+              <ListGroup.Item action href={"#" + index}>
+                <ResultItem expertData={result} />
+              </ListGroup.Item>
+            ))}
           </ListGroup>
         </Col>
         <Col sm={7}>
           <Tab.Content>
-            <Tab.Pane eventKey="#link1">
-              <Profile />
-            </Tab.Pane>
-            <Tab.Pane eventKey="#link2">
-              <Profile />
-            </Tab.Pane>
-            <Tab.Pane eventKey="#link3">
-              <Profile />
-            </Tab.Pane>
-            <Tab.Pane eventKey="#link4">
-              <Profile />
-            </Tab.Pane>
+            {searchResults.map((result, index) => (
+              <Tab.Pane eventKey={"#" + index}>
+                <Profile expertData={result} />
+              </Tab.Pane>
+            ))}
           </Tab.Content>
         </Col>
       </Row>

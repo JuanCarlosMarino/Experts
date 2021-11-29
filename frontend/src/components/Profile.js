@@ -2,32 +2,39 @@ import React from "react";
 import { Stack, Image } from "react-bootstrap";
 import { GeoAlt, Briefcase, Whatsapp } from "react-bootstrap-icons";
 
-const Profile = () => {
+const Profile = (props) => {
+  const { expertData } = props;
+
+  const goToWhatsApp = (contactLink) => {
+    window.open(contactLink);
+  };
+
   return (
     <Stack gap={2} className="align-items-center">
       <Image
-        src="https://cdns-images.dzcdn.net/images/artist/ef6244c655e8cbe91eeb56bb6f934176/500x500.jpg"
+        src={expertData.photoUrl}
         roundedCircle
         width="80px"
         height="80px"
       />
-      <h4>Jorge Luis Hernandez</h4>
+      <h4>{expertData.name}</h4>
       <div className="justify-content-center">
         <Stack gap={2} direction="horizontal">
           <GeoAlt />
-          <div>Paris</div>
+          <div>{expertData.location}</div>
         </Stack>
         <Stack gap={2} direction="horizontal">
           <Briefcase />
-          <div>Clases de programación</div>
+          <div>{expertData.occupation}</div>
         </Stack>
-        <p>
-          Hola! Me encanta la tecnología y tengo bastante experiencia enseñando
-          programación.
-        </p>
+        <p>{expertData.bio}</p>
       </div>
 
-      <Whatsapp size={50} color="green" />
+      <Whatsapp
+        size={50}
+        color="green"
+        onClick={() => goToWhatsApp(expertData.contactLink)}
+      />
     </Stack>
   );
 };

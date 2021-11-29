@@ -13,7 +13,7 @@ const SearchResults = () => {
       </Row>
       <Row>
         <Col>
-          <ResultList />
+          <ResultList location={city} />
         </Col>
       </Row>
     </Container>
