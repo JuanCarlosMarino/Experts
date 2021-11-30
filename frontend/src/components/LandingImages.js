@@ -26,7 +26,7 @@ const LandingImages = () => {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="https://www.smarttravel.news/wp-content/uploads/2019/03/dylan-gillis-533818-unsplash-1024x428.jpg"
+          src="https://ansareo.com/wp-content/uploads/2021/02/obra-1024x428.jpg"
           alt="Second slide"
         />
         <Carousel.Caption style={{ backgroundColor: "rgba(0,0,0,0.5)" }}>
