@@ -35,6 +35,12 @@ const SearchBar = () => {
         </Dropdown.Item>
         <Dropdown.Item
           href={redirectUrl}
+          onClick={() => setSearchedCity("New York")}
+        >
+          New York
+        </Dropdown.Item>
+        <Dropdown.Item
+          href={redirectUrl}
           onClick={() => setSearchedCity("Tokio")}
         >
           Tokio
