@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Landing from "./screens/Landing";
 import Home from "./screens/Home";
 import SearchResults from "./screens/SearchResults";
+import Register from "./screens/Register";
 import NotFound from "./screens/NotFound";
 
 import NavBar from "./components/NavBar";
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<Landing />} />
           <Route path="/home" element={<Home />} />
           <Route path="/search-results" element={<SearchResults />} />
+          <Route path="/signup" element={<Register />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

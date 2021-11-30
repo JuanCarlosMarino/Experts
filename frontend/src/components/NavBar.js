@@ -6,6 +6,10 @@ import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 
 const NavBar = (props) => {
+  const logOut = () => {
+    localStorage.removeItem("user");
+  };
+
   return (
     <div>
       <Navbar bg="dark" variant="dark" expand="lg">
@@ -20,7 +24,9 @@ const NavBar = (props) => {
             <Nav>
               <Nav.Link href="#home">Inicio</Nav.Link>
               <Nav.Link href="#link">Perfil</Nav.Link>
-              <Nav.Link href="#link">Salir</Nav.Link>
+              <Nav.Link href="/" onClick={logOut}>
+                Salir
+              </Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

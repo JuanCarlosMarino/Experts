@@ -11,7 +11,7 @@ const ResultList = (props) => {
 
   useEffect(() => {
     searchExperts(props.location, setSearchResults);
-  });
+  }, []);
 
   return (
     <Tab.Container id="list-group-tabs-example" defaultActiveKey="#0">

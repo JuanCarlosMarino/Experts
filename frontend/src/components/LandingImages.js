@@ -16,7 +16,7 @@ const LandingImages = () => {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="https://raw.githubusercontent.com/JuanCarlosMarino/Experts/frontend/frontend/src/assets/img/people-background.jpg"
+          src="https://ansareo.com/wp-content/uploads/2021/02/obra-1024x428.jpg"
           alt="First slide"
         />
         <Carousel.Caption style={{ backgroundColor: "rgba(0,0,0,0.5)" }}>
@@ -26,7 +26,7 @@ const LandingImages = () => {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="https://raw.githubusercontent.com/JuanCarlosMarino/Experts/frontend/frontend/src/assets/img/people-background2.jpg"
+          src="https://www.idea.org.ar/wp-content/uploads/2018/04/Finanzas-Econom%C3%ADa-y-Negocios-1024x428.jpeg"
           alt="Second slide"
         />
         <Carousel.Caption style={{ backgroundColor: "rgba(0,0,0,0.5)" }}>

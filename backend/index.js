@@ -4,7 +4,7 @@ const dbE = require("./src/db/crudExperts.js");
 const express = require("express");
 const cors = require("cors");
 const app = express();
-const port = 5000;
+const port = process.env.port || 5000;
 
 app.use(express.json());
 app.use(cors());
@@ -42,6 +42,16 @@ app.post("/experts", function (req, res) {
     } else {
       res.status(503).json(status);
     }
+  });
+});
+
+// Crear un experto en la DB con ID
+app.post("/experts/:id", function (req, res) {
+  const uid = req.params.id;
+  const expert = req.body;
+  expert.id = uid;
+  dbE.addExpertWithID(uid, expert, function (status) {
+    res.json(status);
   });
 });
 
