@@ -27,8 +27,7 @@ const ExpertRegister = () => {
                window.location.href="http://localhost:3000/home";
             }else{
                 alert("Algo salió mal, vuelve a intentarlo")
-            }
-            
+            }            
         })                
     }
     return (
@@ -46,8 +45,12 @@ const ExpertRegister = () => {
                     <Form.Label>Location</Form.Label>
                     <Form.Select>
                         <option>Select a location</option>
+                        <option value="Paris">Paris</option>
+                        <option value="Londres">Londres</option>
+                        <option value="Berlin">Berlin</option>
                         <option value="New York">New York</option>
-                        <option value="Bogotá">Bogotá</option>
+                        <option value="Tokio">Tokio</option>
+                        <option value="Cartagena">Cartagena</option>
                     </Form.Select>
                 </Form.Group>
 
@@ -79,7 +82,7 @@ const ExpertRegister = () => {
                 <Container fluid="md">
                     <Row>
                         <Button variant="dark" type="submit">
-                            Submit
+                            Registrarse
                         </Button>
                     </Row>
                 </Container>

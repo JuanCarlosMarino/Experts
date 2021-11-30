@@ -20,7 +20,7 @@ const NavBar = () => {
         <Nav.Link href="/home">
           <Image src={user.photoUrl} width="30px" height="30px" roundedCircle />
         </Nav.Link>
-        <Nav.Link href="/home">
+        <Nav.Link href="/profile">
           <strong>{user.name}</strong>
         </Nav.Link>
         <Nav.Link href="/home">Inicio</Nav.Link>
@@ -36,7 +36,7 @@ const NavBar = () => {
     <div>
       <Navbar bg="dark" variant="dark" expand="lg">
         <Container>
-          <Navbar.Brand href="#home">Experts</Navbar.Brand>
+          <Navbar.Brand href="/">Experts</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
           <Navbar.Collapse
