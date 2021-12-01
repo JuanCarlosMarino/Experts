@@ -24,7 +24,7 @@ const ExpertRegister = () => {
             if(res == "Success"){
                user.flagNewUser = false;
                localStorage.setItem("user", JSON.stringify(user));
-               window.location.href="http://localhost:3000/home";
+               window.location.href="/home";
             }else{
                 alert("Algo salió mal, vuelve a intentarlo")
             }            
