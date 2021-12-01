@@ -11,6 +11,7 @@ const ResultList = (props) => {
 
   useEffect(() => {
     searchExperts(props.city, setSearchResults);
+    console.log(searchResults)
   }, []);
 
   return (
