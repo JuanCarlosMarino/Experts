@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseUrl = "https://experts-searches.herokuapp.com";
+const baseUrl = "http://localhost:8080";
 
 export function searchExperts(city, callback) {
   axios.get(baseUrl + "/experts/search/" + city).then((res) => {
