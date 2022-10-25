@@ -11,9 +11,13 @@ const Home = () => {
       <SidebarContainer></SidebarContainer>
       <div className="content-wrapper">
         <ContentHeader></ContentHeader>
-        <section className="content"></section>
+        <section className="content">
+          <div className="container-fluid">
+            <div className="row"></div>
+          </div>
+        </section>
       </div>
-    <Footer></Footer>
+      <Footer></Footer>
     </div>
   );
 };
