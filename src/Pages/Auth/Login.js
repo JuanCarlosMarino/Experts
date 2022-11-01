@@ -1,7 +1,39 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { login } from "../../utils/APIInvoke";
 
 const Login = () => {
+  const navigate = useNavigate();
+
+  const [usuario, setUsuario] = useState({
+    nickname: "",
+    password: "",
+  });
+
+  const { nickname, password } = usuario;
+  const onchange = (e) => {
+    setUsuario({
+      ...usuario,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  useEffect(() => {
+    document.getElementById("nickname").focus();
+  }, []);
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    login(usuario, function (response) {
+      if (response.data.access) {
+        localStorage.setItem("session", response.data.token);
+        navigate("/home");
+      } else {
+        alert("Hubo un error revisa tus datos ingresados!");
+      }
+    });
+  };
+
   return (
     <div className="hold-transition login-page">
       <div className="login-box">
@@ -16,18 +48,21 @@ const Login = () => {
             <p className="login-box-msg">
               Bienvenido, ingrese sus credenciales
             </p>
-            <form action="../../index3.html" method="post">
+            <form onSubmit={onSubmit}>
               <div className="input-group mb-3">
                 <input
-                  type="email"
+                  type="text"
                   className="form-control"
-                  placeholder="Email"
-                  id="email"
-                  name="email"
+                  placeholder="Nickname"
+                  id="nickname"
+                  name="nickname"
+                  value={nickname}
+                  onChange={onchange}
+                  required
                 />
                 <div className="input-group-append">
                   <div className="input-group-text">
-                    <span className="fas fa-envelope" />
+                    <span className="fas fa-user" />
                   </div>
                 </div>
               </div>
@@ -38,6 +73,9 @@ const Login = () => {
                   placeholder="Contraseña"
                   id="password"
                   name="password"
+                  value={password}
+                  onChange={onchange}
+                  required
                 />
                 <div className="input-group-append">
                   <div className="input-group-text">

@@ -1,30 +1,45 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import {createUser} from "../../utils/APIInvoke";
 
 const CrearCuenta = () => {
+  const navigate = useNavigate();
+
   const [usuario, setUsuario] = useState({
-    nombre:'',
-    email: '',
-    password: '',
-    confirmar: ''
+    firstname: "",
+    lastname: "",
+    nickname: "",
+    email: "",
+    password: "",
+    confirmar: "",
   });
 
-  const {nombre, email, password, confirmar} = usuario;
+  const { firstname, lastname, nickname, email, password, confirmar } = usuario;
   const onchange = (e) => {
     setUsuario({
-        ...usuario,
-        [e.target.name]: e.target.value
-    })
-  }
+      ...usuario,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   useEffect(() => {
-    document.getElementById('nombre').focus();
-  }, [])
+    document.getElementById("firstname").focus();
+  }, []);
 
   const onSubmit = (e) => {
     e.preventDefault();
-
-  }
+    if (usuario.password === usuario.confirmar) {
+      createUser(usuario, function (response) {
+        if (response.data.isAccept) {
+          navigate("/");
+        } else {
+          alert("Hubo un error revisa tus datos ingresados!");
+        }
+      });
+    } else {
+      alert("Hubo un error revisa tus datos ingresados!");
+    }
+  };
 
   return (
     <div className="hold-transition login-page">
@@ -44,9 +59,45 @@ const CrearCuenta = () => {
                   type="text"
                   className="form-control"
                   placeholder="Nombre"
-                  id="nombre"
-                  name="nombre"
-                  value={nombre}
+                  id="firstname"
+                  name="firstname"
+                  value={firstname}
+                  onChange={onchange}
+                  required
+                />
+                <div className="input-group-append">
+                  <div className="input-group-text">
+                    <span className="fas fa-user" />
+                  </div>
+                </div>
+              </div>
+
+              <div className="input-group mb-3">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Apellido"
+                  id="lastname"
+                  name="lastname"
+                  value={lastname}
+                  onChange={onchange}
+                  required
+                />
+                <div className="input-group-append">
+                  <div className="input-group-text">
+                    <span className="fas fa-user" />
+                  </div>
+                </div>
+              </div>
+
+              <div className="input-group mb-3">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Nickname"
+                  id="nickname"
+                  name="nickname"
+                  value={nickname}
                   onChange={onchange}
                   required
                 />
