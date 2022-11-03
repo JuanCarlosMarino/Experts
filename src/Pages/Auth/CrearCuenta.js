@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {createUser} from "../../utils/APIInvoke";
+import {createUser} from "../../ApiCalls/APIInvoke";
 
 const CrearCuenta = () => {
   const navigate = useNavigate();

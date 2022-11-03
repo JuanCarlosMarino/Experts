@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { login } from "../../utils/APIInvoke";
+import { login } from "../../ApiCalls/APIInvoke";
 
 const Login = () => {
   const navigate = useNavigate();

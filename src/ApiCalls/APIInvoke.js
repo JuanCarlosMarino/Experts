@@ -25,7 +25,22 @@ function login(user, callback) {
     });
 }
 
-export  {
-    createUser,
-    login
+function validUser(token, callback) {
+  axios({
+    method: "get",
+    url: config.api.baseURl + "/user/valid/token",
+    headers: {
+      Authorization: "Bearer " + token,
+      "Content-Type": "application/json",
+    },
+  })
+    .then(function (response) {
+      callback(response);
+      // console.log(response.data.message)
+    })
+    .catch(function (error) {
+      callback(error);
+    });
 }
+
+export { createUser, login, validUser };

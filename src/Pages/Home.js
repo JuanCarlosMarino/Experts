@@ -3,8 +3,18 @@ import ContentHeader from "../Components/ContentHeader";
 import Footer from "../Components/Footer";
 import NavBar from "../Components/NavBar";
 import SidebarContainer from "../Components/SidebarContainer";
+import { useNavigate } from "react-router-dom";
+import { validUser } from "../ApiCalls/APIInvoke";
 
 const Home = () => {
+  const navigate = useNavigate();
+  validUser(localStorage.getItem("session"), function (res) {
+    console.log(res.data)
+    if (!res.data.isValid) {
+      navigate("/");
+    }
+  });
+
   return (
     <div className="wrapper">
       <NavBar></NavBar>
