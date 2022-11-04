@@ -5,6 +5,7 @@ import Login from "./Pages/Auth/Login";
 import "./app.css";
 import CrearCuenta from "./Pages/Auth/CrearCuenta";
 import Home from "./Pages/Home";
+import Perfil from "./Pages/Perfil";
 function App() {
   return (
     <div className="App">
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/singup" element={<CrearCuenta />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/perfil" element={<Perfil />} />
         </Routes>
       </BrowserRouter>
     </div>
