@@ -6,7 +6,7 @@ import SidebarContainer from "../Components/SidebarContainer";
 import { useNavigate } from "react-router-dom";
 import { validUser } from "../ApiCalls/APIInvoke";
 
-const Home = () => {
+const Home = (props) => {
   const navigate = useNavigate();
   validUser(localStorage.getItem("session"), function (res) {
     console.log(res.data)
@@ -20,7 +20,7 @@ const Home = () => {
       <NavBar></NavBar>
       <SidebarContainer></SidebarContainer>
       <div className="content-wrapper">
-        <ContentHeader></ContentHeader>
+        <ContentHeader title="Home"></ContentHeader>
         <section className="content">
           <div className="container-fluid">
             <div className="row"></div>

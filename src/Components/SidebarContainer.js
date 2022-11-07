@@ -4,6 +4,8 @@ import Logo from '../../node_modules/admin-lte/dist/img/AdminLTELogo.png';
 import { Link } from 'react-router-dom';
 
 const SidebarContainer = () => {
+  const userName = localStorage.getItem("user")
+
   return (
     <aside className="main-sidebar sidebar-dark-primary elevation-4">
       {/* Brand Logo */}
@@ -33,7 +35,7 @@ const SidebarContainer = () => {
       </div> */}
           <div className="info">
             <Link to="/perfil" className="d-block">
-              Alexander Pierce
+              { userName || "Usuario"}
             </Link>
           </div>
         </div>

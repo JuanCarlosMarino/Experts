@@ -27,6 +27,7 @@ const Login = () => {
     login(usuario, function (response) {
       if (response.data.access) {
         localStorage.setItem("session", response.data.token);
+        localStorage.setItem("user", response.data.nickname);
         navigate("/home");
       } else {
         alert("Hubo un error revisa tus datos ingresados!");
