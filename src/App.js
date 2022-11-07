@@ -6,7 +6,6 @@ import "./app.css";
 import CrearCuenta from "./Pages/Auth/CrearCuenta";
 import Home from "./Pages/Home";
 import Perfil from "./Pages/Perfil";
-import PerfilTest from "./Pages/PerfilTest";
 function App() {
   return (
     <div className="App">
@@ -18,7 +17,6 @@ function App() {
           <Route path="/singup" element={<CrearCuenta />} />
           <Route path="/home" element={<Home />} />
           <Route path="/perfil" element={<Perfil />} />
-          <Route path="/perfilTest" element={<PerfilTest />} />
         </Routes>
       </BrowserRouter>
     </div>
