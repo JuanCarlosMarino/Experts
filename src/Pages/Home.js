@@ -19,16 +19,113 @@ const Home = (props) => {
     <div className="wrapper">
       <NavBar></NavBar>
       <SidebarContainer></SidebarContainer>
-      <div className="content-wrapper">
+      <div className="content-wrapper ">
         <ContentHeader title="Home"></ContentHeader>
-        <section className="content">
+
+        <section className="content" style={{ width: 'auto' }}>
           <div className="container-fluid">
-            <div className="row"></div>
+            <div className="card card-primary">
+              <div className="card-header">
+                <h3 className="card-title">Busca a un experto</h3>
+              </div>
+
+              <section classname="content">
+                <div classname="container-fluid">
+                  <div classname="row">
+                    <div className="card-body">
+                      <div className="row">
+                        <div className="col-md-6">
+                          <div className="form-group">
+                            <label>Elije una ubicacion</label>
+                            <select className="form-control select2 col-3" style={{ width: '100%' }}>
+                              <option selected="selected">Alabama</option>
+                              <option>Alaska</option>
+                              <option>California</option>
+                              <option>Delaware</option>
+                              <option>Tennessee</option>
+                              <option>Texas</option>
+                              <option>Washington</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <div className="card-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </div>
+            <div class="row">
+              <div className="col-12">
+                <div className="card">
+                  <div className="card-header">
+                    <h3 className="card-title">Responsive Hover Table</h3>
+                    <div className="card-tools">
+                     
+                    </div>
+                  </div>
+                  {/* /.card-header */}
+                  <div className="card-body table-responsive p-0">
+                    <table className="table table-hover text-nowrap">
+                      <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>User</th>
+                          <th>Date</th>
+                          <th>Status</th>
+                          <th>Reason</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>183</td>
+                          <td>John Doe</td>
+                          <td>11-7-2014</td>
+                          <td><span className="tag tag-success">Approved</span></td>
+                          <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                        </tr>
+                        <tr>
+                          <td>219</td>
+                          <td>Alexander Pierce</td>
+                          <td>11-7-2014</td>
+                          <td><span className="tag tag-warning">Pending</span></td>
+                          <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                        </tr>
+                        <tr>
+                          <td>657</td>
+                          <td>Bob Doe</td>
+                          <td>11-7-2014</td>
+                          <td><span className="tag tag-primary">Approved</span></td>
+                          <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                        </tr>
+                        <tr>
+                          <td>175</td>
+                          <td>Mike Doe</td>
+                          <td>11-7-2014</td>
+                          <td><span className="tag tag-danger">Denied</span></td>
+                          <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  {/* /.card-body */}
+                </div>
+                {/* /.card */}
+              </div>
+            </div>
           </div>
+
+
         </section>
-      </div>
+
+
+      </div >
+
       <Footer></Footer>
-    </div>
+    </div >
   );
 };
 
