@@ -1,20 +1,34 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import ContentHeader from '../Components/ContentHeader'
 import Footer from '../Components/Footer'
 import NavBar from '../Components/NavBar'
 import SidebarContainer from '../Components/SidebarContainer'
 import { useNavigate } from "react-router-dom";
-import { validUser } from "../ApiCalls/APIInvoke";
+import { validUser , getUserByNick} from "../ApiCalls/APIInvoke";
 
 const Perfil = () => {
+  const [user, setUser] = useState({})
+
+  useEffect(() => {
+    getUserByNick(localStorage.getItem("session") , function(res){
+      setUser(res.data.result)
+    })
+  }, [])
+  useEffect(() => {
+    // console.log(user)
+
+  }, [user])
+  
 
   const navigate = useNavigate();
   validUser(localStorage.getItem("session"), function (res) {
-    console.log(res.data)
     if (!res.data.isValid) {
       navigate("/");
     }
   });
+
+  const [passwordCheck, setPasswordCheck] = useState(true)
+  const [convertToExpert, setConvertToExpert] = useState(false)
 
   return (
     <div className="wrapper">
@@ -77,7 +91,7 @@ const Perfil = () => {
                                 href="#ally"
                                 data-toggle="tab"
                               >
-                                Aliado
+                                Editar
                               </a>
                             </li>
                           </ul>
@@ -90,7 +104,7 @@ const Perfil = () => {
                               {/* About Me Box */}
                               <div className="card card-primary">
                                 <div className="card-header">
-                                  <h3 className="card-title">About Me</h3>
+                                  <h3 className="card-title">Sobre mi</h3>
                                 </div>
                                 {/* /.card-header */}
                                 <div className="card-body">
@@ -140,30 +154,14 @@ const Perfil = () => {
                                     htmlFor="inputName"
                                     className="col-sm-2 col-form-label"
                                   >
-                                    Name
+                                    Nombre
                                   </label>
                                   <div className="col-sm-10">
                                     <input
                                       type="email"
                                       className="form-control"
                                       id="inputName"
-                                      placeholder="Name"
-                                    />
-                                  </div>
-                                </div>
-                                <div className="form-group row">
-                                  <label
-                                    htmlFor="inputEmail"
-                                    className="col-sm-2 col-form-label"
-                                  >
-                                    Email
-                                  </label>
-                                  <div className="col-sm-10">
-                                    <input
-                                      type="email"
-                                      className="form-control"
-                                      id="inputEmail"
-                                      placeholder="Email"
+                                      placeholder="Nombre"
                                     />
                                   </div>
                                 </div>
@@ -172,53 +170,141 @@ const Perfil = () => {
                                     htmlFor="inputName2"
                                     className="col-sm-2 col-form-label"
                                   >
-                                    Name
+                                    Apellido
                                   </label>
                                   <div className="col-sm-10">
                                     <input
                                       type="text"
                                       className="form-control"
                                       id="inputName2"
-                                      placeholder="Name"
+                                      placeholder="Apellido"
                                     />
                                   </div>
                                 </div>
                                 <div className="form-group row">
                                   <label
-                                    htmlFor="inputExperience"
+                                    htmlFor="inputEmail"
                                     className="col-sm-2 col-form-label"
                                   >
-                                    Experience
-                                  </label>
-                                  <div className="col-sm-10">
-                                    <textarea
-                                      className="form-control"
-                                      id="inputExperience"
-                                      placeholder="Experience"
-                                      defaultValue={""}
-                                    />
-                                  </div>
-                                </div>
-                                <div className="form-group row">
-                                  <label
-                                    htmlFor="inputSkills"
-                                    className="col-sm-2 col-form-label"
-                                  >
-                                    Skills
+                                    Correo
                                   </label>
                                   <div className="col-sm-10">
                                     <input
-                                      type="text"
+                                      type="email"
                                       className="form-control"
-                                      id="inputSkills"
-                                      placeholder="Skills"
+                                      id="inputEmail"
+                                      placeholder="Correo"
                                     />
                                   </div>
                                 </div>
 
                                 <div className="form-group row">
+                                  <label
+                                    htmlFor="inputEmail"
+                                    className="col-sm-2 col-form-label"
+                                  >
+                                    Nickname
+                                  </label>
+                                  <div className="col-sm-10">
+                                    <input
+                                      type="email"
+                                      className="form-control"
+                                      id="inputEmail"
+                                      placeholder="Nickname"
+                                    />
+                                  </div>
+                                </div>
+
+                                <label for="password">
+                                  <input type="checkbox" id="password" name="password" onClick={() => { setPasswordCheck(!passwordCheck) }} />  Cambiar contraseña
+                                </label>
+
+                                <div className="form-group row">
+                                  <label
+                                    htmlFor="inputEmail"
+                                    className="col-sm-2 col-form-label"
+                                  >
+                                    Contraseña
+                                  </label>
+                                  <div className="col-sm-10">
+                                    <input
+                                      disabled={passwordCheck}
+                                      type="email"
+                                      className="form-control"
+                                      id="inputEmail"
+                                      placeholder="Contraseña"
+                                    />
+                                  </div>
+                                </div>
+
+                                <div className="form-group row">
+                                  <label
+                                    htmlFor="inputEmail"
+                                    className="col-sm-2 col-form-label"
+                                  >
+                                    Confrimar contraseña
+                                  </label>
+                                  <div className="col-sm-10">
+                                    <input
+                                      disabled={passwordCheck}
+                                      type="email"
+                                      className="form-control"
+                                      id="inputEmail"
+                                      placeholder="confirmar contraseña"
+
+                                    />
+                                  </div>
+                                </div>
+
+                                <label for="Expert">
+                                  <input type="checkbox" id="Expert" name="Expert" onClick={() => { setConvertToExpert(!convertToExpert) }} />  Convertime en Experto
+                                </label>
+                                {convertToExpert ? <>
+                                  <div className="form-group row">
+                                    <label
+                                      htmlFor="inputExperience"
+                                      className="col-sm-2 col-form-label"
+                                    >
+                                      Experience
+                                    </label>
+                                    <div className="col-sm-10">
+                                      <textarea
+                                        className="form-control"
+                                        id="inputExperience"
+                                        placeholder="Experience"
+                                        defaultValue={""}
+                                      />
+                                    </div>
+                                  </div>
+                                  <div className="form-group row">
+                                    <label
+                                      htmlFor="inputSkills"
+                                      className="col-sm-2 col-form-label"
+                                    >
+                                      Ocupacion
+                                    </label>
+                                    <div className="col-sm-10">
+                                      <input
+                                        type="text"
+                                        className="form-control"
+                                        id="inputSkills"
+                                        placeholder="Ocupacion"
+                                      />
+                                    </div>
+                                  </div>
+                                </> :
+                                  <></>
+
+                                }
+
+
+
+
+
+                                <div className="form-group row">
                                   <div className="offset-sm-2 col-sm-10">
                                     <button
+
                                       type="submit"
                                       className="btn btn-danger"
                                     >
