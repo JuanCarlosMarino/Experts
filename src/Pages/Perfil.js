@@ -4,21 +4,59 @@ import Footer from '../Components/Footer'
 import NavBar from '../Components/NavBar'
 import SidebarContainer from '../Components/SidebarContainer'
 import { useNavigate } from "react-router-dom";
-import { validUser , getUserByNick} from "../ApiCalls/APIInvoke";
+import { validUser, getUserByNick, getLocations } from "../ApiCalls/APIInvoke";
 
 const Perfil = () => {
   const [user, setUser] = useState({})
+  const [locations, setLocations] = useState([])
 
   useEffect(() => {
-    getUserByNick(localStorage.getItem("session") , function(res){
+    getLocations(setLocations)
+    getUserByNick(localStorage.getItem("session"), function (res) {
       setUser(res.data.result)
     })
   }, [])
+
   useEffect(() => {
-    // console.log(user)
 
   }, [user])
-  
+
+  const [currentLocationName, setCurrentLocationName] = useState("")
+  useEffect(() => {
+    // const findLocationName = (id) =>{
+    //   return (locations.find(e => e._id === "63685bfb011d9978e24362e0").name)
+    // }
+    setCurrentLocationName(locations.find(e => e._id === user.location))
+  }, [locations])
+
+
+
+  // const findLocationName = (id) =>{
+  //   var currentLocation = "";
+  //   for (let i = 0; i < locations.length; i++) {
+  //     if ("63685bfb011d9978e24362e0" == locations._id) {
+  //       setCurrentLocationName(locations[i].name)
+  //       console.log(locations[i])
+  //       console.log(currentLocation)
+  //       return locations[i].name
+
+  //       break
+  //     }
+  //   }
+  // }
+
+  // //Method to find the name of a location given a set ID
+  // const getLocationName = (id) =>{
+  //   // var currentLocation = "";
+  //   for (let i = 0; i < locations.length; i++) {
+  //      return currentLocation = locations.find(id)
+  //     }
+  //     // setCurrentLocationAvailable(currentLocations)
+  //   }
+  // }
+
+
+
 
   const navigate = useNavigate();
   validUser(localStorage.getItem("session"), function (res) {
@@ -31,6 +69,7 @@ const Perfil = () => {
   const [convertToExpert, setConvertToExpert] = useState(false)
 
   return (
+
     <div className="wrapper">
       <NavBar></NavBar>
       <SidebarContainer></SidebarContainer>
@@ -57,10 +96,16 @@ const Perfil = () => {
                             />
                           </div>
                           <h3 className="profile-username text-center" style={{ marginTop: 20 }}>
-                            Nina Mcintire
+                            {user.firstname} {user.lastname}
                           </h3>
                           <p className="text-muted text-center">
-                            Software Engineer
+                            {user.isExpert ?
+                              <>
+                                Experto: @{user.nickname}
+                              </> :
+                              <>
+                                Usuario: @{user.nickname}
+                              </>}
                           </p>
 
                         </div>
@@ -109,37 +154,47 @@ const Perfil = () => {
                                 {/* /.card-header */}
                                 <div className="card-body">
                                   <strong>
-                                    <i className="fas fa-book mr-1" /> Education
+                                    <i className="fas fa-user mr-1" /> Nombre y Nick
                                   </strong>
                                   <p className="text-muted">
-                                    B.S. in Computer Science from the University of
-                                    Tennessee at Knoxville
+                                    {user.firstname} {user.lastname} @{user.nickname}
                                   </p>
                                   <hr />
+
                                   <strong>
-                                    <i className="fas fa-map-marker-alt mr-1" /> Location
-                                  </strong>
-                                  <p className="text-muted">Malibu, California</p>
-                                  <hr />
-                                  <strong>
-                                    <i className="fas fa-pencil-alt mr-1" /> Skills
+                                    <i className="fas fa-envelope mr-1" /> Correo
                                   </strong>
                                   <p className="text-muted">
-                                    <span className="tag tag-danger">UI Design</span>
-                                    <span className="tag tag-success">Coding</span>
-                                    <span className="tag tag-info">Javascript</span>
-                                    <span className="tag tag-warning">PHP</span>
-                                    <span className="tag tag-primary">Node.js</span>
+                                    {user.email}
                                   </p>
                                   <hr />
-                                  <strong>
-                                    <i className="far fa-file-alt mr-1" /> Notes
-                                  </strong>
-                                  <p className="text-muted">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                    Etiam fermentum enim neque.
-                                  </p>
+
+                                  {user.occupation != null ?
+                                    <>
+                                      <strong>
+                                        <i className="far fa-file-alt mr-1" /> Ocupacion
+                                      </strong>
+                                      <p className="text-muted">
+                                        {user.occupation}
+                                      </p>
+                                      <hr />
+                                    </>
+
+                                    : <></>}
+
+                                  {user.location != null && currentLocationName != null ?
+                                    <>
+                                      <strong>
+                                        <i className="fas fa-map-marker-alt mr-1" /> Location
+                                      </strong>
+                                      <p className="text-muted"> {currentLocationName.name} - {currentLocationName.code}</p>
+                                    </>
+                                    :
+                                    <></>
+                                  }
+
                                 </div>
+
                                 {/* /.card-body */}
                               </div>
 

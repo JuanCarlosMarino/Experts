@@ -30,9 +30,6 @@ const Home = (props) => {
   }, [])
 
   useEffect(() => {
-    
-    console.log(locations)
-
     //Metodo para obtener todo los paises registrados
     var currentLocations = [];
     for (let i = 0; i < locations.length; i++) {
