@@ -4,7 +4,7 @@ import Footer from '../Components/Footer'
 import NavBar from '../Components/NavBar'
 import SidebarContainer from '../Components/SidebarContainer'
 import { useNavigate } from "react-router-dom";
-import { validUser, getUserByNick, getLocations } from "../ApiCalls/APIInvoke";
+import { validUser, getUserByNick, getLocations, updateUser } from "../ApiCalls/APIInvoke";
 
 const Perfil = () => {
   const [user, setUser] = useState({})
@@ -53,19 +53,49 @@ const Perfil = () => {
   const [passwordCheck, setPasswordCheck] = useState(true)
   const [convertToExpert, setConvertToExpert] = useState(false)
 
-  const [currentLocationSelected, setCurrentLocationSelected] = useState(currentLocationName || "")
+  const [currentLocationSelected, setCurrentLocationSelected] = useState(currentLocationName || "Argentina")
 
   //Handlers for selection a location
   function handleLocation(e) {
     setCurrentLocationSelected(e.target.value)
+
+    //var location_id = locations.find(e => e.name === currentLocationSelected)._id
+
+    setUsuario({
+      ...usuario,
+      ["location"]: locations.find(ee => ee.name === e.target.value)._id,
+    });
+
     //var locationId = locations.find(e => e.name === currentLocationSelected)._id
   }
 
-  //Handlers for selection a location
-  function handleLocation(e) {
-    setCurrentLocationSelected(e.target.value)
-    //var locationId = locations.find(e => e.name === currentLocationSelected)._id
+  const [usuario, setUsuario] = useState({});
+
+  const onchange = (e) => {
+    setUsuario({
+      ...usuario,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+
+  //Used to set a user to exper and change their location
+  function isExpertChange(option) {
+    if (option === true) {
+
+      var location_id = locations.find(e => e.name === currentLocationSelected)._id
+      usuario['isExpert'] = true
+      usuario['location'] = location_id
+    }
   }
+
+  function onSubmit(){
+    updateUser(localStorage.getItem("session"), user.nickname, usuario , function(res){
+      console.log(res)
+    })
+  }
+
+
 
   return (
 
@@ -210,13 +240,16 @@ const Perfil = () => {
                                   >
                                     Nombre
                                   </label>
+                                  {console.log(usuario)}
                                   <div className="col-sm-10">
                                     <input
-                                      type="email"
+                                      type="text"
                                       className="form-control"
-                                      id="inputName"
+                                      id="firstname"
+                                      name="firstname"
                                       defaultValue={user.firstname}
                                       placeholder="Nombre"
+                                      onChange={onchange}
                                     />
                                   </div>
                                 </div>
@@ -231,9 +264,11 @@ const Perfil = () => {
                                     <input
                                       type="text"
                                       className="form-control"
-                                      id="inputName2"
+                                      id="lastname"
+                                      name="lastname"
                                       placeholder="Apellido"
                                       defaultValue={user.lastname}
+                                      onChange={onchange}
                                     />
                                   </div>
                                 </div>
@@ -249,9 +284,11 @@ const Perfil = () => {
                                     <input
                                       type="email"
                                       className="form-control"
-                                      id="inputEmail"
+                                      id="email"
+                                      name="email"
                                       placeholder="Correo"
                                       defaultValue={user.email}
+                                      onChange={onchange}
                                     />
                                   </div>
                                 </div>
@@ -265,11 +302,14 @@ const Perfil = () => {
                                   </label>
                                   <div className="col-sm-10">
                                     <input
-                                      type="email"
+                                      type="text"
                                       className="form-control"
-                                      id="inputEmail"
+                                      id="nickname"
+                                      name="nickname"
                                       placeholder="Nickname"
                                       defaultValue={user.nickname}
+                                      onChange={onchange}
+
                                     />
                                   </div>
                                 </div>
@@ -300,9 +340,11 @@ const Perfil = () => {
                                         <input
                                           type="text"
                                           className="form-control"
-                                          id="inputSkills"
+                                          id="occupation"
+                                          name="occupation"
                                           placeholder="Ocupacion"
                                           defaultValue={user.occupation}
+                                          onChange={onchange}
                                         />
                                       </div>
                                     </div>
@@ -311,9 +353,16 @@ const Perfil = () => {
                                   </>
                                   :
                                   <>
-                                    <label for="Expert">
-                                      <input type="checkbox" id="Expert" name="Expert" onClick={() => { setConvertToExpert(!convertToExpert) }} style={{ marginTop: 20, marginBottom: 20 }} />  Convertirme en Experto
-                                    </label>
+                                    {!convertToExpert ?
+                                      <>
+                                        <label for="Expert">
+                                          <input type="checkbox" id="Expert" name="Expert" onClick={() => { setConvertToExpert(!convertToExpert); isExpertChange(true) }} style={{ marginTop: 20, marginBottom: 20 }} />  Convertirme en Experto
+                                        </label>
+                                      </> :
+                                      <>
+                                        <p>LLena los campos de abajo para convertirte en un experto</p>
+                                      </>}
+
 
                                     {convertToExpert ? <>
                                       <div className="form-group row">
@@ -338,8 +387,11 @@ const Perfil = () => {
                                           <input
                                             type="text"
                                             className="form-control"
-                                            id="inputSkills"
+                                            id="occupation"
+                                            name="occupation"
                                             placeholder="Ocupacion"
+                                            defaultValue={user.occupation}
+                                            onChange={onchange}
                                           />
                                         </div>
                                       </div>
@@ -352,62 +404,16 @@ const Perfil = () => {
 
 
                                 <br></br>
-                                <label for="password">
-                                  <input type="checkbox" id="password" name="password" onClick={() => { setPasswordCheck(!passwordCheck) }} style={{ marginTop: 0, marginBottom: 40 }} />  Cambiar contraseña
-                                </label>
-
-
-                                <div className="form-group row">
-                                  <label
-                                    htmlFor="inputEmail"
-                                    className="col-sm-2 col-form-label"
-                                  >
-                                    Contraseña
-                                  </label>
-                                  <div className="col-sm-10">
-                                    <input
-                                      disabled={passwordCheck}
-                                      type="email"
-                                      className="form-control"
-                                      id="inputEmail"
-                                      placeholder="Contraseña"
-                                    />
-                                  </div>
-                                </div>
-
-                                <div className="form-group row">
-                                  <label
-                                    htmlFor="inputEmail"
-                                    className="col-sm-2 col-form-label"
-                                  >
-                                    Confrimar contraseña
-                                  </label>
-                                  <div className="col-sm-10">
-                                    <input
-                                      disabled={passwordCheck}
-                                      type="email"
-                                      className="form-control"
-                                      id="inputEmail"
-                                      placeholder="confirmar contraseña"
-
-                                    />
-                                  </div>
-                                </div>
-
-
-
-
-
-
 
                                 <div className="form-group row">
                                   <div className="offset-sm-2 col-sm-10">
                                     <button
 
-                                      type="submit"
+                                      // type="submit"
                                       className="btn btn-danger"
+                                      onClick={()=>{onSubmit()}}
                                     >
-                                      Submit
+                                      Guardar
                                     </button>
                                   </div>
                                 </div>

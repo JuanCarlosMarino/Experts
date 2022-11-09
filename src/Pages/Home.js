@@ -20,8 +20,6 @@ const Home = (props) => {
   const expertsInLocation = (location) => {
     //llamdo al backend
     getExpertsByLocation(localStorage.getItem("session"), location, setExistingExperts)
-    // console.log(existingExperts)
-
   }
 
   //Gets all locations registered in the backend

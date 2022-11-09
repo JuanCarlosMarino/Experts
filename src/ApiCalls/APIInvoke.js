@@ -99,4 +99,26 @@ function getExpertsByLocation(token, location, callback) {
     });
 }
 
-export { createUser, login, validUser, getLocations, getUserByNick,getExpertsByLocation };
+function updateUser(token, nick, user,callback) {
+  axios({
+    method: "post",
+    url: config.api.baseURl + "/user/update/" + nick,
+    data:user,
+    headers: {
+      Authorization: "Bearer " + token,
+      "Content-Type": "application/json",
+    },
+  })
+
+    .then(function (response) {
+      callback(response.data);
+      
+    })
+    .catch(function (error) {
+      callback(error);
+    });
+}
+
+
+
+export { createUser, login, validUser, getLocations, getUserByNick,getExpertsByLocation, updateUser};
