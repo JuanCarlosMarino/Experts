@@ -20,7 +20,7 @@ const Home = (props) => {
   const expertsInLocation = (location) => {
     //llamdo al backend
     getExpertsByLocation(localStorage.getItem("session"), location, setExistingExperts)
-    console.log(existingExperts)
+    // console.log(existingExperts)
 
   }
 
@@ -54,7 +54,7 @@ const Home = (props) => {
 
   const navigate = useNavigate();
   validUser(localStorage.getItem("session"), function (res) {
-    console.log(res.data)
+    // console.log(res.data)
     if (!res.data.isValid) {
       navigate("/");
     }
