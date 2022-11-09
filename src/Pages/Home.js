@@ -43,6 +43,7 @@ const Home = (props) => {
     }
   }, [locations])
 
+  //currentLocationsAvailable[0] 
   const [currentLocationSelected, setCurrentLocationSelected] = useState("Argentina")
 
   //Handlers for selection a location
@@ -74,7 +75,7 @@ const Home = (props) => {
                 <h3 className="card-title">Busca a un experto</h3>
               </div>
 
-              <section classname="content">
+              <section className="content">
                 <div classname="container-fluid">
                   <div classname="row">
                     <div className="card-body">
@@ -92,12 +93,12 @@ const Home = (props) => {
               </section>
 
               <div className="card-footer">
-                <button type="submit" class="btn btn-primary" onClick={() => (expertsInLocation(locations.find(e => e.name === currentLocationSelected)._id))}>Buscar</button>
+                <button type="submit" className="btn btn-primary" onClick={() => (expertsInLocation(locations.find(e => e.name === currentLocationSelected)._id))}>Buscar</button>
               </div>
             </div>
             {existingExperts.length < 1 ?
               <>
-                <div class="row">
+                <div className="row">
                   <div className="col-12">
                     <div className="card">
                       <div className="card-header">
@@ -116,7 +117,7 @@ const Home = (props) => {
               </>
               :
               <>
-                <div class="row">
+                <div className="row">
                   <div className="col-12">
                     <div className="card">
                       <div className="card-header">
