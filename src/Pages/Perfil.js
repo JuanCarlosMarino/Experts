@@ -10,8 +10,11 @@ const Perfil = () => {
   const [user, setUser] = useState({})
   const [locations, setLocations] = useState([])
 
+  //Setting all currently available locations
+  const [currentLocationsAvailable, setCurrentLocationAvailable] = useState([])
+
   useEffect(() => {
-    getLocations(localStorage.getItem("session"),setLocations)
+    getLocations(localStorage.getItem("session"), setLocations)
     getUserByNick(localStorage.getItem("session"), function (res) {
       setUser(res.data.result)
     })
@@ -27,6 +30,17 @@ const Perfil = () => {
   useEffect(() => {
     // sets the name for a location based on its ID
     setCurrentLocationName(locations.find(e => e._id === user.location))
+
+    var currentLocations = [];
+    for (let i = 0; i < locations.length; i++) {
+      const element = locations[i].name;
+      if (!currentLocations.includes(element)) {
+        currentLocations.push(element)
+      }
+      setCurrentLocationAvailable(currentLocations)
+    }
+
+
   }, [locations])
 
   const navigate = useNavigate();
@@ -39,9 +53,18 @@ const Perfil = () => {
   const [passwordCheck, setPasswordCheck] = useState(true)
   const [convertToExpert, setConvertToExpert] = useState(false)
 
-  const searchExperts = (id) =>{
-    
+  const [currentLocationSelected, setCurrentLocationSelected] = useState(currentLocationName || "")
 
+  //Handlers for selection a location
+  function handleLocation(e) {
+    setCurrentLocationSelected(e.target.value)
+    //var locationId = locations.find(e => e.name === currentLocationSelected)._id
+  }
+
+  //Handlers for selection a location
+  function handleLocation(e) {
+    setCurrentLocationSelected(e.target.value)
+    //var locationId = locations.find(e => e.name === currentLocationSelected)._id
   }
 
   return (
@@ -192,6 +215,7 @@ const Perfil = () => {
                                       type="email"
                                       className="form-control"
                                       id="inputName"
+                                      defaultValue={user.firstname}
                                       placeholder="Nombre"
                                     />
                                   </div>
@@ -209,6 +233,7 @@ const Perfil = () => {
                                       className="form-control"
                                       id="inputName2"
                                       placeholder="Apellido"
+                                      defaultValue={user.lastname}
                                     />
                                   </div>
                                 </div>
@@ -216,6 +241,7 @@ const Perfil = () => {
                                   <label
                                     htmlFor="inputEmail"
                                     className="col-sm-2 col-form-label"
+
                                   >
                                     Correo
                                   </label>
@@ -225,6 +251,7 @@ const Perfil = () => {
                                       className="form-control"
                                       id="inputEmail"
                                       placeholder="Correo"
+                                      defaultValue={user.email}
                                     />
                                   </div>
                                 </div>
@@ -242,13 +269,93 @@ const Perfil = () => {
                                       className="form-control"
                                       id="inputEmail"
                                       placeholder="Nickname"
+                                      defaultValue={user.nickname}
                                     />
                                   </div>
                                 </div>
 
+
+                                {user.isExpert ?
+                                  <>
+
+                                    <div className="form-group row">
+                                      <label
+                                        htmlFor="inputExperience"
+                                        className="col-sm-2 col-form-label"
+                                      >
+                                        Ubicacion
+                                      </label>
+                                      <div className="col-sm-10">
+                                        <select className="form-control select2 col-5" style={{ width: '100%' }} onChange={handleLocation}> {currentLocationsAvailable.map((x, y) => <option key={y}>{x}</option>)}</select>
+                                      </div>
+                                    </div>
+                                    <div className="form-group row">
+                                      <label
+                                        htmlFor="inputSkills"
+                                        className="col-sm-2 col-form-label"
+                                      >
+                                        Ocupacion
+                                      </label>
+                                      <div className="col-sm-10">
+                                        <input
+                                          type="text"
+                                          className="form-control"
+                                          id="inputSkills"
+                                          placeholder="Ocupacion"
+                                          defaultValue={user.occupation}
+                                        />
+                                      </div>
+                                    </div>
+
+
+                                  </>
+                                  :
+                                  <>
+                                    <label for="Expert">
+                                      <input type="checkbox" id="Expert" name="Expert" onClick={() => { setConvertToExpert(!convertToExpert) }} style={{ marginTop: 20, marginBottom: 20 }} />  Convertirme en Experto
+                                    </label>
+
+                                    {convertToExpert ? <>
+                                      <div className="form-group row">
+                                        <label
+                                          htmlFor="inputExperience"
+                                          className="col-sm-2 col-form-label"
+                                        >
+                                          Ubicacion
+                                        </label>
+                                        <div className="col-sm-10">
+                                          <select className="form-control select2 col-5" style={{ width: '100%' }} onChange={handleLocation}> {currentLocationsAvailable.map((x, y) => <option key={y}>{x}</option>)}</select>
+                                        </div>
+                                      </div>
+                                      <div className="form-group row">
+                                        <label
+                                          htmlFor="inputSkills"
+                                          className="col-sm-2 col-form-label"
+                                        >
+                                          Ocupacion
+                                        </label>
+                                        <div className="col-sm-10">
+                                          <input
+                                            type="text"
+                                            className="form-control"
+                                            id="inputSkills"
+                                            placeholder="Ocupacion"
+                                          />
+                                        </div>
+                                      </div>
+                                    </> :
+                                      <></>
+
+                                    }
+
+                                  </>}
+
+
+                                <br></br>
                                 <label for="password">
-                                  <input type="checkbox" id="password" name="password" onClick={() => { setPasswordCheck(!passwordCheck) }} />  Cambiar contraseña
+                                  <input type="checkbox" id="password" name="password" onClick={() => { setPasswordCheck(!passwordCheck) }} style={{ marginTop: 0, marginBottom: 40 }} />  Cambiar contraseña
                                 </label>
+
 
                                 <div className="form-group row">
                                   <label
@@ -287,46 +394,7 @@ const Perfil = () => {
                                   </div>
                                 </div>
 
-                                <label for="Expert">
-                                  <input type="checkbox" id="Expert" name="Expert" onClick={() => { setConvertToExpert(!convertToExpert) }} />  Convertime en Experto
-                                </label>
-                                {convertToExpert ? <>
-                                  <div className="form-group row">
-                                    <label
-                                      htmlFor="inputExperience"
-                                      className="col-sm-2 col-form-label"
-                                    >
-                                      Experience
-                                    </label>
-                                    <div className="col-sm-10">
-                                      <textarea
-                                        className="form-control"
-                                        id="inputExperience"
-                                        placeholder="Experience"
-                                        defaultValue={""}
-                                      />
-                                    </div>
-                                  </div>
-                                  <div className="form-group row">
-                                    <label
-                                      htmlFor="inputSkills"
-                                      className="col-sm-2 col-form-label"
-                                    >
-                                      Ocupacion
-                                    </label>
-                                    <div className="col-sm-10">
-                                      <input
-                                        type="text"
-                                        className="form-control"
-                                        id="inputSkills"
-                                        placeholder="Ocupacion"
-                                      />
-                                    </div>
-                                  </div>
-                                </> :
-                                  <></>
 
-                                }
 
 
 
