@@ -3,8 +3,8 @@ import ContentHeader from "../Components/ContentHeader";
 import Footer from "../Components/Footer";
 import NavBar from "../Components/NavBar";
 import SidebarContainer from "../Components/SidebarContainer";
-import { useNavigate } from "react-router-dom";
-import { validUser, getLocations } from "../ApiCalls/APIInvoke";
+import { useAsyncError, useNavigate } from "react-router-dom";
+import { validUser, getLocations, getExpertsByLocation } from "../ApiCalls/APIInvoke";
 
 
 const Home = (props) => {
@@ -17,18 +17,20 @@ const Home = (props) => {
   const [existingExperts, setExistingExperts] = useState([])
 
   //variable to search for experts given a certain location
-  const expertsInLocation = () => {
+  const expertsInLocation = (location) => {
     //llamdo al backend
+    getExpertsByLocation(localStorage.getItem("session"), location, setExistingExperts)
+    console.log(existingExperts)
 
-    
   }
 
-
+  //Gets all locations registered in the backend
   useEffect(() => {
-    getLocations(localStorage.getItem("session"),setLocations)
-  
+    getLocations(localStorage.getItem("session"), setLocations)
+
   }, [])
 
+  //Parses the locations bu elements into an array
   useEffect(() => {
     //Metodo para obtener todo los paises registrados
     var currentLocations = [];
@@ -40,6 +42,14 @@ const Home = (props) => {
       setCurrentLocationAvailable(currentLocations)
     }
   }, [locations])
+
+  const [currentLocationSelected, setCurrentLocationSelected] = useState("Argentina")
+
+  //Handlers for selection a location
+  function handleLocation(e) {
+    setCurrentLocationSelected(e.target.value)
+    //var locationId = locations.find(e => e.name === currentLocationSelected)._id
+  }
 
 
   const navigate = useNavigate();
@@ -72,7 +82,7 @@ const Home = (props) => {
                         <div className="col-md-6">
                           <div className="form-group">
                             <label>Elije una ubicacion</label>
-                            <select className="form-control select2 col-5" style={{ width: '100%' }}> {currentLocationsAvailable.map((x, y) => <option key={y}>{x}</option>)}</select>
+                            <select className="form-control select2 col-5" style={{ width: '100%' }} onChange={handleLocation}> {currentLocationsAvailable.map((x, y) => <option key={y}>{x}</option>)}</select>
                           </div>
                         </div>
                       </div>
@@ -82,10 +92,10 @@ const Home = (props) => {
               </section>
 
               <div className="card-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary" onClick={() => (expertsInLocation(locations.find(e => e.name === currentLocationSelected)._id))}>Buscar</button>
               </div>
             </div>
-            {existingExperts != null ?
+            {existingExperts.length < 1 ?
               <>
                 <div class="row">
                   <div className="col-12">
@@ -93,16 +103,16 @@ const Home = (props) => {
                       <div className="card-header">
                         <h3 className="card-title">Expertos Disponibles</h3>
                         <div className="card-tools">
-                        
+
                         </div>
                       </div>
-                      <h4 style={{textAlign:"center", marginTop:25, marginBottom:25}}>No hay Experto en esta ubicacion, intenta buscar por otra ubicacion</h4>
+                      <h4 style={{ textAlign: "center", marginTop: 25, marginBottom: 25 }}>No hay Experto en esta ubicacion, intenta buscar por otra ubicacion</h4>
                     </div>
                   </div>
                 </div>
 
 
-                
+
               </>
               :
               <>
@@ -116,46 +126,27 @@ const Home = (props) => {
                         </div>
                       </div>
                       {/* /.card-header */}
+
                       <div className="card-body table-responsive p-0">
                         <table className="table table-hover text-nowrap">
                           <thead>
                             <tr>
-                              <th>ID</th>
-                              <th>User</th>
-                              <th>Date</th>
-                              <th>Status</th>
-                              <th>Reason</th>
+                              <th>Nombre</th>
+                              <th>Nick</th>
+                              <th>Email</th>
+                              <th>Ocupacion</th>
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <td>183</td>
-                              <td>John Doe</td>
-                              <td>11-7-2014</td>
-                              <td><span className="tag tag-success">Approved</span></td>
-                              <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                            </tr>
-                            <tr>
-                              <td>219</td>
-                              <td>Alexander Pierce</td>
-                              <td>11-7-2014</td>
-                              <td><span className="tag tag-warning">Pending</span></td>
-                              <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                            </tr>
-                            <tr>
-                              <td>657</td>
-                              <td>Bob Doe</td>
-                              <td>11-7-2014</td>
-                              <td><span className="tag tag-primary">Approved</span></td>
-                              <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                            </tr>
-                            <tr>
-                              <td>175</td>
-                              <td>Mike Doe</td>
-                              <td>11-7-2014</td>
-                              <td><span className="tag tag-danger">Denied</span></td>
-                              <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                            </tr>
+                            {existingExperts.map((x, y) =>
+                              <tr key={y}>
+                                <td>{x.firstname} {x.lastname} </td>
+                                <td>@{x.nickname}</td>
+                                <td>{x.email}</td>
+                                <td>{x.occupation} </td>
+                              </tr>
+                            )}
+
                           </tbody>
                         </table>
                       </div>
