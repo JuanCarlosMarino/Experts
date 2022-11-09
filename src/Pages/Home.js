@@ -25,7 +25,7 @@ const Home = (props) => {
 
 
   useEffect(() => {
-    getLocations(setLocations)
+    getLocations(localStorage.getItem("session"),setLocations)
   
   }, [])
 

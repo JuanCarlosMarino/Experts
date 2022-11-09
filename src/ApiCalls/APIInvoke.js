@@ -43,16 +43,33 @@ function validUser(token, callback) {
     });
 }
 
-function getLocations(callback) {
-  axios
-    .get(config.api.baseURl + "/location/locations")
-    .then(function (response) {
-      callback(response.data.result);
-      // console.log(response.data.message)
+function getLocations(token,callback) {
+  // axios
+  //   .get(config.api.baseURl + "/location/locations")
+  //   .then(function (response) {
+  //     callback(response.data.result);
+  //     // console.log(response.data.message)
+  //   })
+  //   .catch(function (error) {
+  //     callback(error);
+  //   });
+
+    axios({
+      method: "get",
+      url: config.api.baseURl + "/location/locations/",
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+      },
     })
-    .catch(function (error) {
-      callback(error);
-    });
+      .then(function (response) {
+        callback(response.data.result);
+        // console.log(response.data.message)
+      })
+      .catch(function (error) {
+        callback(error);
+      });
+
 }
 
 

@@ -11,7 +11,7 @@ const Perfil = () => {
   const [locations, setLocations] = useState([])
 
   useEffect(() => {
-    getLocations(setLocations)
+    getLocations(localStorage.getItem("session"),setLocations)
     getUserByNick(localStorage.getItem("session"), function (res) {
       setUser(res.data.result)
     })
@@ -21,42 +21,13 @@ const Perfil = () => {
 
   }, [user])
 
+  //displays current location name ex."United States"
   const [currentLocationName, setCurrentLocationName] = useState("")
+
   useEffect(() => {
-    // const findLocationName = (id) =>{
-    //   return (locations.find(e => e._id === "63685bfb011d9978e24362e0").name)
-    // }
+    // sets the name for a location based on its ID
     setCurrentLocationName(locations.find(e => e._id === user.location))
   }, [locations])
-
-
-
-  // const findLocationName = (id) =>{
-  //   var currentLocation = "";
-  //   for (let i = 0; i < locations.length; i++) {
-  //     if ("63685bfb011d9978e24362e0" == locations._id) {
-  //       setCurrentLocationName(locations[i].name)
-  //       console.log(locations[i])
-  //       console.log(currentLocation)
-  //       return locations[i].name
-
-  //       break
-  //     }
-  //   }
-  // }
-
-  // //Method to find the name of a location given a set ID
-  // const getLocationName = (id) =>{
-  //   // var currentLocation = "";
-  //   for (let i = 0; i < locations.length; i++) {
-  //      return currentLocation = locations.find(id)
-  //     }
-  //     // setCurrentLocationAvailable(currentLocations)
-  //   }
-  // }
-
-
-
 
   const navigate = useNavigate();
   validUser(localStorage.getItem("session"), function (res) {
@@ -67,6 +38,11 @@ const Perfil = () => {
 
   const [passwordCheck, setPasswordCheck] = useState(true)
   const [convertToExpert, setConvertToExpert] = useState(false)
+
+  const searchExperts = (id) =>{
+    
+
+  }
 
   return (
 
