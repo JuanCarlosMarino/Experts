@@ -91,7 +91,7 @@ const Perfil = () => {
 
   function onSubmit(){
     updateUser(localStorage.getItem("session"), user.nickname, usuario , function(res){
-      console.log(res)
+      // console.log(res)
     })
   }
 
@@ -240,7 +240,6 @@ const Perfil = () => {
                                   >
                                     Nombre
                                   </label>
-                                  {console.log(usuario)}
                                   <div className="col-sm-10">
                                     <input
                                       type="text"
